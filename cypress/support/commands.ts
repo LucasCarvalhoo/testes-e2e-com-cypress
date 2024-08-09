@@ -6,6 +6,9 @@ declare namespace Cypress {
     interface Chainable<Subject> {
       fillSignupFormAndSubmit(email: string, password: string): Chainable<void>;
     }
+    interface Chainable<Subject> {
+      fillLoginFormAndSubmit(email: string, password: string): Chainable<void>;
+    }
   }  
 
 Cypress.Commands.add('fillSignupFormAndSubmit', (email, password) => {
@@ -23,4 +26,15 @@ Cypress.Commands.add('fillSignupFormAndSubmit', (email, password) => {
       cy.get('#confirmationCode').type(`${confirmationCode}{enter}`)
       cy.wait('@getNotes')
     })
+  })
+
+Cypress.Commands.add('fillLoginFormAndSubmit', (email, password) => {
+    cy.intercept('GET', '**/notes').as('getNotes')
+    cy.visit('/login')
+    cy.get('#email').type(email)
+    cy.get('#password').type(password, { log: false })
+    cy.contains('button', 'Login').click()
+    
+    cy.get('h1').should('be.visible')
+    cy.get('h4').should('be.visible')
   })
