@@ -15,6 +15,9 @@ declare namespace Cypress {
     interface Chainable<Subject> {
       sessionLogin(email: string, password: string): Chainable<void>;
     }
+    interface Chainable<Subject> {
+      crud(): Chainable<void>;
+    }
   }  
 
 Cypress.Commands.add('fillSignupFormAndSubmit', (email, password) => {
@@ -71,4 +74,10 @@ Cypress.Commands.add('sessionLogin', (
 ) => {
   const login = () => cy.guiLogin(email, password)
   cy.session(email, login)
+})
+
+Cypress.Commands.add('crud', (
+
+) => {
+  
 })
