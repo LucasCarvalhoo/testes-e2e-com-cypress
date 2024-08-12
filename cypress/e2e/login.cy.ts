@@ -2,11 +2,11 @@
 
 import { faker } from '@faker-js/faker/locale/en'
 
-describe('Login', () => {
+describe('guiLogin', () => {
     const emailAddress = `${Cypress.env('USER_EMAIL')}`
     const password = Cypress.env('USER_PASSWORD')
 
     it('successfully login using confirmation code sent via email', () => {
-        cy.fillLoginFormAndSubmit(emailAddress, password)
+        cy.guiLogin(emailAddress, password)
     })
 })
